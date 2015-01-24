@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour {
     bool isDead;
     //bool isSinking;
 
+    public GameManager gameManager;
+
 
     void Awake()
     {
@@ -59,6 +61,10 @@ public class EnemyHealth : MonoBehaviour {
     void Death()
     {
         isDead = true;
+        if(gameManager != null)
+        {
+            gameManager.RemoveGarbage();
+        }
         Destroy(gameObject);
 
 
