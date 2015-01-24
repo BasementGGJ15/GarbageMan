@@ -19,6 +19,7 @@ public class Collectible : MonoBehaviour {
         Debug.Log("Collision Occured");
         if (other.gameObject.tag == "Player")
         {
+            collider.enabled = false;
             pickUpTarget.Get();
             child.enabled = false;
             GameObject.Destroy(this.gameObject, 1.0f);
