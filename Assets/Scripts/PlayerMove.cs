@@ -6,12 +6,12 @@ public class PlayerMove : MonoBehaviour
 
     public float speed = 6f;
     public float range = 100f;
-
-    Vector2 movement;
-    Vector2 aim;
+    
+    Vector3 movement;
+    Vector3 aim;
     LineRenderer gunLine;
     //	Animator anim;
-    Rigidbody2D playerRigidbody;
+    Rigidbody playerRigidbody;
     public LayerMask layerToIgnore;
 
     public GameObject bullet;
@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     void Awake()
     {
         //		anim = GetComponent<Animator> ();
-        playerRigidbody = GetComponent<Rigidbody2D>();
+        playerRigidbody = GetComponent<Rigidbody>();
         gunLine = GetComponent<LineRenderer>();
         gunLine.sortingLayerName = "OnGround";
     }
@@ -46,12 +46,12 @@ public class PlayerMove : MonoBehaviour
 
     void Move(float h, float v)
     {
-        movement.Set(h, v);
+        movement.Set(h, 0, v);
 
         movement = movement.normalized * speed * Time.deltaTime;
 
         playerRigidbody.MovePosition(playerRigidbody.position + movement);
-        playerRigidbody.angularVelocity = 0;
+        //playerRigidbody.angularVelocity = 0;
     }
 
     void Aiming(float h, float v)
@@ -63,7 +63,7 @@ public class PlayerMove : MonoBehaviour
         else
         {
             //			Debug.Log("h: " + h + "  v: " + v);
-            aim.Set(h, v);
+            aim.Set(h, 0, v);
             gunLine.enabled = true;
 
             RaycastHit2D hit = Physics2D.Raycast(playerRigidbody.position, aim, Mathf.Infinity, ~layerToIgnore);
@@ -87,6 +87,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+
+    //void LateUpdate()
+    //{
+    //    transform.LookAt(transform.position - Vector3.up);
+
+    //}
 
     //	void Animating(float h, float v)
     //	{
