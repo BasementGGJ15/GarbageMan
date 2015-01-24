@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
-        gunLine = GetComponent<LineRenderer>();
+        gunLine = GetComponentInChildren<LineRenderer>();
         gunLine.sortingLayerName = "OnGround";
     }
 
