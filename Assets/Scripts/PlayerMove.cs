@@ -26,7 +26,8 @@ public class PlayerMove : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
-        gunLine = GetComponentInChildren<LineRenderer>();
+        GameObject gunLineObj = GameObject.FindGameObjectWithTag("GunLine");
+        gunLine = gunLineObj.GetComponent<LineRenderer>();
         gunLine.sortingLayerName = "OnGround";
     }
 
