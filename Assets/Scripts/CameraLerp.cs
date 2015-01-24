@@ -10,12 +10,13 @@ public class CameraLerp : MonoBehaviour {
     Vector3 LerpStep;
     Vector3 LerpStopPoint;
     bool lerpInProgress;
-    float closeEnoughToEnd = 1.0f;
+    float closeEnoughToEnd = 0.1f;
     void Start () 
     {
-        transform.position = new Vector3(point1.position.x, point1.position.y, transform.position.z);
-        LerpStep = Vector3.Lerp(transform.position, point2.position, Smoothing);
-        LerpStopPoint = new Vector3(point2.position.x, point2.position.y, transform.position.z);
+        transform.position = new Vector3(point1.position.x, transform.position.y, point1.position.z);
+        LerpStopPoint = new Vector3(point2.position.x, transform.position.y, point2.position.z);
+        Vector3 LerpPoint = Vector3.Lerp(transform.position, LerpStopPoint, Smoothing);
+        LerpStep = LerpPoint - transform.position;
 	}
 	
 	void Update () 
@@ -28,7 +29,8 @@ public class CameraLerp : MonoBehaviour {
         if (lerpInProgress)
         {
             transform.position += LerpStep * Time.deltaTime;
-            Vector2 difference = transform.position - LerpStopPoint;
+            Vector3 difference = transform.position - LerpStopPoint;
+            Debug.Log(string.Format("Different: {0}",difference.sqrMagnitude));
             if (difference.sqrMagnitude <= closeEnoughToEnd)
             {
                 lerpInProgress = false;
