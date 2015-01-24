@@ -9,5 +9,10 @@ public class DestroyByCollider : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+        if (other.tag == "Damageable")
+        {
+            EnemyHealth eh = other.gameObject.GetComponent<EnemyHealth>();
+            eh.TakeDamage(1);
+        }
     }
 }

@@ -59,6 +59,8 @@ public class EnemyHealth : MonoBehaviour {
     void Death()
     {
         isDead = true;
+        Destroy(gameObject);
+
 
         //collider.isTrigger = true;
 
