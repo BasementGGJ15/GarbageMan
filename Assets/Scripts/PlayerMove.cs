@@ -82,8 +82,8 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetButton("Fire1") && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-                atan2 = Mathf.Atan2(aim.y, aim.x);
-                Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(0f, 0f, atan2 * Mathf.Rad2Deg - 90f));
+                atan2 = Mathf.Atan2(aim.x, aim.z);
+                Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(90f, atan2 * Mathf.Rad2Deg, 0f));
             }
         }
     }

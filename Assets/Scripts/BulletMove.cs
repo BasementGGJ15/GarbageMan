@@ -7,6 +7,6 @@ public class BulletMove : MonoBehaviour {
 	
 	void Start ()
 	{
-		rigidbody2D.velocity = transform.up * speed;
+		rigidbody.velocity = transform.up * speed;
 	}
 }
