@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 movement;
     Vector3 aim;
     LineRenderer gunLine;
-    //	Animator anim;
+    Animator anim;
     Rigidbody playerRigidbody;
     public LayerMask layerToIgnore;
 
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        //		anim = GetComponent<Animator> ();
+        anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         gunLine = GetComponent<LineRenderer>();
         gunLine.sortingLayerName = "OnGround";
@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
 
         Move(h, v);
         Aiming(aimH, aimV);
-        //		Animating (h, v);
+        Animating(h, v);
     }
 
     void Move(float h, float v)
@@ -88,15 +88,34 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    //void LateUpdate()
-    //{
-    //    transform.LookAt(transform.position - Vector3.up);
-
-    //}
-
-    //	void Animating(float h, float v)
-    //	{
-    //		bool walking = h != 0f || v != 0f;
-    //		anim.SetBool ("IsWalking", walking);
-    //	}
+    void Animating(float h, float v)
+    {
+        if (!(h == 0 && v == 0))
+        {
+            if (Mathf.Abs(h) > Mathf.Abs(v))
+            {
+                //horizontal
+                if (h > 0)
+                {
+                    anim.SetTrigger("MovingRight");
+                }
+                else
+                {
+                    anim.SetTrigger("MovingLeft");
+                }
+            }
+            else
+            {
+                //vertical
+                if (v > 0)
+                {
+                    anim.SetTrigger("MovingBack");
+                }
+                else
+                {
+                    anim.SetTrigger("MovingForward");
+                }
+            }
+        }
+    }
 }
