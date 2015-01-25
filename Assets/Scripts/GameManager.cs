@@ -17,21 +17,25 @@ public class GameManager : MonoBehaviour {
 
     public CameraLerp cameraLerp;
 
-    Dictionary<string, int> areaTagToInt = new Dictionary<string, int>()
-    {
-        { "Area1", 1},
-        { "Area2", 2},
-        { "Area3", 3},
-        { "Area4", 4},
-        { "Area5", 5}
-    };
+    Dictionary<string, Area> areaTagToInt; 
 
 	// Use this for initialization
 	void Start () {
+        areaTagToInt = new Dictionary<string, Area>()
+        {
+            { "Area1", new Area() {Id = 1,Location =  areas[0], Name = "Area1" }},
+            { "Area2", new Area() {Id = 2,Location =  areas[1], Name = "Area2" }},
+            { "Area3", new Area() {Id = 3,Location =  areas[2], Name = "Area3" }},
+            { "Area4", new Area() {Id = 4,Location =  areas[3], Name = "Area4" }},
+            { "Area5", new Area() {Id = 5,Location =  areas[4], Name = "Area5" }}
+        };
+        
         garbageMeter.maxValue = maxGarbageForCurrentLevel;
         garbageMeter.value = garbageAmount;
         Doors = new Dictionary<int, List<GameObject>>();
         Doors.Add(1, Area1Doors);
+
+
 	}
 	
 	// Update is called once per frame
@@ -74,12 +78,16 @@ public class GameManager : MonoBehaviour {
         if (areas[currentArea-1].transform.position == neighbours[0].transform.position)
         {
             cameraLerp.StartLerping(neighbours[0], neighbours[1]);
-            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out currentArea);
+            Area area;
+            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out area);
+            currentArea = area.Id;
         }
         else
         {
             cameraLerp.StartLerping(neighbours[1], neighbours[0]);
-            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out currentArea);
+            Area area;
+            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out area);
+            currentArea = area.Id;
         }
     }
 }
