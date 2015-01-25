@@ -13,16 +13,17 @@ public class CameraLerp : MonoBehaviour {
     float closeEnoughToEnd = 0.1f;
     void Start () 
     {
-        transform.position = new Vector3(point1.position.x, transform.position.y, point1.position.z);
-        LerpStopPoint = new Vector3(point2.position.x, transform.position.y, point2.position.z);
-        Vector3 LerpPoint = Vector3.Lerp(transform.position, LerpStopPoint, Smoothing);
-        LerpStep = LerpPoint - transform.position;
+        //transform.position = new Vector3(point1.position.x, transform.position.y, point1.position.z);
+        //LerpStopPoint = new Vector3(point2.position.x, transform.position.y, point2.position.z);
+        //Vector3 LerpPoint = Vector3.Lerp(transform.position, LerpStopPoint, Smoothing);
+        //LerpStep = LerpPoint - transform.position;
 	}
 	
 	void Update () 
     {
 	    if (Input.GetKey(KeyCode.T) && !lerpInProgress)
         {
+            CalculateLerpStep();
             lerpInProgress = true;
             Debug.Log("Camera Move started");
         }
@@ -38,4 +39,13 @@ public class CameraLerp : MonoBehaviour {
             }       
         } 
 	}
+
+    void CalculateLerpStep()
+    {
+        transform.position = new Vector3(point1.position.x, transform.position.y, point1.position.z);
+        LerpStopPoint = new Vector3(point2.position.x, transform.position.y, point2.position.z);
+        Vector3 LerpPoint = Vector3.Lerp(transform.position, LerpStopPoint, Smoothing);
+        LerpStep = LerpPoint - transform.position;
+    }
+
 }
