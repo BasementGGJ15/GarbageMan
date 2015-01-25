@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour {
     public int currentArea = 1;
     public Transform[] areas;
 
+    
+
     public Dictionary<int, List<GameObject>> Doors;
-    public List<GameObject> Area1Doors;
+    //public List<GameObject> Area1Doors;
 
     public CameraLerp cameraLerp;
 
@@ -21,21 +23,21 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        //get doors
+        
         areaTagToInt = new Dictionary<string, Area>()
         {
-            { "Area1", new Area() {Id = 1,Location =  areas[0], Name = "Area1" }},
-            { "Area2", new Area() {Id = 2,Location =  areas[1], Name = "Area2" }},
-            { "Area3", new Area() {Id = 3,Location =  areas[2], Name = "Area3" }},
-            { "Area4", new Area() {Id = 4,Location =  areas[3], Name = "Area4" }},
-            { "Area5", new Area() {Id = 5,Location =  areas[4], Name = "Area5" }}
+            { "Area1", new Area() {Id = 1,Location =  areas[0], Name = "Area1", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area1Spawner")}},
+            { "Area2", new Area() {Id = 2,Location =  areas[1], Name = "Area2", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area2Spawner") }},
+            { "Area3", new Area() {Id = 3,Location =  areas[2], Name = "Area3", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area3Spawner") }},
+            { "Area4", new Area() {Id = 4,Location =  areas[3], Name = "Area4", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area4Spawner") }},
+            { "Area5", new Area() {Id = 5,Location =  areas[4], Name = "Area5", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area5Spawner") }}
         };
         
         garbageMeter.maxValue = maxGarbageForCurrentLevel;
         garbageMeter.value = garbageAmount;
-        Doors = new Dictionary<int, List<GameObject>>();
-        Doors.Add(1, Area1Doors);
-
-
+        //Doors = new Dictionary<int, List<GameObject>>();
+        //Doors.Add(1, Area1Doors);
 	}
 	
 	// Update is called once per frame
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour {
         garbageMeter.value = garbageAmount;
         if (garbageAmount == 0)
         {
-            foreach (GameObject door in Area1Doors)
+            foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
             {
                 DoorActivator da = door.GetComponent<DoorActivator>();
                 da.OpenDoor();

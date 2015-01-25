@@ -16,7 +16,6 @@ public class Collectible : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision Occured");
         if (other.gameObject.tag == "Player")
         {
             collider.enabled = false;

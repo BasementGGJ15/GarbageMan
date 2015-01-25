@@ -10,7 +10,7 @@ public class CameraLerp : MonoBehaviour {
     Vector3 LerpStep;
     Vector3 LerpStopPoint;
     bool lerpInProgress;
-    float closeEnoughToEnd = 0.1f;
+    float closeEnoughToEnd = 0.01f;
 	
 	void Update () 
     {

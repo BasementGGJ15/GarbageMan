@@ -8,5 +8,9 @@ public class Area
     public string Name;
     public int Id;
 
+    //public GameObject[] doors;
+    public GameObject[] spawners;
 
+    public int startingGarbage;
+    public int maxGarbage;
 }

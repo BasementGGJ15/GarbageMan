@@ -61,7 +61,7 @@ public class RandomWalkEnemy : MonoBehaviour {
     void DropBomb()
     {
         garbageTimer = 0.0f;
-        var newPieceOfGarbage = (GameObject)GameObject.Instantiate(GarbagePrefab, transform.position, Quaternion.identity);
+        GameObject.Instantiate(GarbagePrefab, transform.position - Destination.normalized, Quaternion.identity);
         gameManager.AddGarbage();
     }
 }
