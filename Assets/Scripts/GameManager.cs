@@ -10,8 +10,12 @@ public class GameManager : MonoBehaviour {
     public Slider garbageMeter;
 
     public int currentArea = 1;
+    public Transform[] areas;
+
     public Dictionary<int, List<GameObject>> Doors;
     public List<GameObject> Area1Doors;
+
+    public CameraLerp cameraLerp;
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +57,20 @@ public class GameManager : MonoBehaviour {
                 DoorActivator da = door.GetComponent<DoorActivator>();
                 da.OpenDoor();
             }
+        }
+    }
+
+    public void TransitionArea(Transform[] neighbours)
+    {
+        if (areas[currentArea-1].transform.position == neighbours[0].transform.position)
+        {
+            cameraLerp.StartLerping(neighbours[0], neighbours[1]);
+            currentArea = 2;
+        }
+        else
+        {
+            cameraLerp.StartLerping(neighbours[1], neighbours[0]);
+            currentArea = 1;
         }
     }
 }
