@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
         garbageMeter.value = garbageAmount;
         if (garbageAmount == maxGarbageForCurrentLevel)
         {
+            Debug.Log("YOU DED!");
             //Do Game Over
         }
     }
