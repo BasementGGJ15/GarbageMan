@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -9,11 +10,15 @@ public class GameManager : MonoBehaviour {
     public Slider garbageMeter;
 
     public int currentArea = 1;
+    public Dictionary<int, List<GameObject>> Doors;
+    public List<GameObject> Area1Doors;
 
 	// Use this for initialization
 	void Start () {
         garbageMeter.maxValue = maxGarbageForCurrentLevel;
         garbageMeter.value = garbageAmount;
+        Doors = new Dictionary<int, List<GameObject>>();
+        Doors.Add(1, Area1Doors);
 	}
 	
 	// Update is called once per frame
@@ -43,7 +48,11 @@ public class GameManager : MonoBehaviour {
         garbageMeter.value = garbageAmount;
         if (garbageAmount == 0)
         {
-            //Do Open
+            foreach (GameObject door in Area1Doors)
+            {
+                DoorActivator da = door.GetComponent<DoorActivator>();
+                da.OpenDoor();
+            }
         }
     }
 }
