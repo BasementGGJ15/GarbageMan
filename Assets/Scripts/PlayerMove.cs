@@ -22,8 +22,16 @@ public class PlayerMove : MonoBehaviour
 
     private float atan2;
 
+    private bool isDead = false;
+
+    AudioSource audioSource;
+    public AudioClip deathByMeter;
+    public AudioClip shoot;
+    public AudioClip deathByHealth;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         GameObject gunLineObj = GameObject.FindGameObjectWithTag("GunLine");
@@ -34,15 +42,18 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        if (!isDead)
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
 
-        float aimH = Input.GetAxisRaw("Horizontal2");
-        float aimV = Input.GetAxisRaw("Vertical2");
+            float aimH = Input.GetAxisRaw("Horizontal2");
+            float aimV = Input.GetAxisRaw("Vertical2");
 
-        Move(h, v);
-        Aiming(aimH, aimV);
-        Animating(h, v);
+            Move(h, v);
+            Aiming(aimH, aimV);
+            Animating(h, v);
+        }
     }
 
     void Move(float h, float v)
@@ -82,9 +93,11 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetButton("Fire1") && Time.time > nextFire)
             {
+                audioSource.clip = shoot;
                 nextFire = Time.time + fireRate;
                 atan2 = Mathf.Atan2(aim.x, aim.z);
                 Instantiate(bullet, bulletSpawn.position, Quaternion.Euler(90f, atan2 * Mathf.Rad2Deg, 0f));
+                audioSource.Play();
             }
         }
     }
@@ -118,5 +131,23 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DieFromMeter()
+    {
+        anim.SetTrigger("DieFromMeter");
+        isDead = true;
+    }
+
+    public void DieFromHealth()
+    {
+        anim.SetTrigger("DieFromHealth");
+        isDead = true;
+    }
+
+    public void PlayDeathSound()
+    {
+        audioSource.clip = deathByMeter;
+        audioSource.Play();
     }
 }

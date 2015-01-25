@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
         garbageMeter.value = garbageAmount;
         if (garbageAmount == maxGarbageForCurrentLevel)
         {
-            //Do Game Over
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>().DieFromMeter();
         }
     }
 
