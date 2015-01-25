@@ -17,6 +17,15 @@ public class GameManager : MonoBehaviour {
 
     public CameraLerp cameraLerp;
 
+    Dictionary<string, int> areaTagToInt = new Dictionary<string, int>()
+    {
+        { "Area1", 1},
+        { "Area2", 2},
+        { "Area3", 3},
+        { "Area4", 4},
+        { "Area5", 5}
+    };
+
 	// Use this for initialization
 	void Start () {
         garbageMeter.maxValue = maxGarbageForCurrentLevel;
@@ -65,12 +74,12 @@ public class GameManager : MonoBehaviour {
         if (areas[currentArea-1].transform.position == neighbours[0].transform.position)
         {
             cameraLerp.StartLerping(neighbours[0], neighbours[1]);
-            currentArea = 2;
+            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out currentArea);
         }
         else
         {
             cameraLerp.StartLerping(neighbours[1], neighbours[0]);
-            currentArea = 1;
+            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out currentArea);
         }
     }
 }
