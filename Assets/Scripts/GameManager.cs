@@ -79,30 +79,58 @@ public class GameManager : MonoBehaviour {
     {
         if (areas[currentArea-1].transform.position == neighbours[0].transform.position)
         {
+            Area areaFrom;
+            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out areaFrom);
+            areaFrom.startingGarbage = 0;
             cameraLerp.StartLerping(neighbours[0], neighbours[1]);
-            Area area;
-            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out area);
-            currentArea = area.Id;
-            SetMaxGarbage(area.maxGarbage);
-            garbageAmount = area.startingGarbage;
+            Area areaTo;
+            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out areaTo);
+            currentArea = areaTo.Id;
+            SetMaxGarbage(areaTo.maxGarbage);
+            garbageAmount = areaTo.startingGarbage;
             garbageMeter.value = garbageAmount;
-            foreach (GameObject spawner in area.spawners)
+            foreach (GameObject spawner in areaTo.spawners)
             {
-                spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+                if (spawner != null)
+                {
+                    spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+                }
+            }
+            if (garbageAmount > 0)
+            {
+                foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
+                {
+                    DoorActivator da = door.GetComponent<DoorActivator>();
+                    da.CloseDoor();
+                }
             }
         }
         else
         {
+            Area areaFrom;
+            areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out areaFrom);
+            areaFrom.startingGarbage = 0;
             cameraLerp.StartLerping(neighbours[1], neighbours[0]);
-            Area area;
-            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out area);
-            currentArea = area.Id;
-            SetMaxGarbage(area.maxGarbage);
-            garbageAmount = area.startingGarbage;
+            Area areaTo;
+            areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out areaTo);
+            currentArea = areaTo.Id;
+            SetMaxGarbage(areaTo.maxGarbage);
+            garbageAmount = areaTo.startingGarbage;
             garbageMeter.value = garbageAmount;
-            foreach (GameObject spawner in area.spawners)
+            foreach (GameObject spawner in areaTo.spawners)
             {
-                spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+                if (spawner != null)
+                {
+                    spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+                }
+            }
+            if (garbageAmount > 0)
+            {
+                foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
+                {
+                    DoorActivator da = door.GetComponent<DoorActivator>();
+                    da.CloseDoor();
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ public class DoorCloser : MonoBehaviour {
 	void Start () {
 	    if (Doors.Length >= 0)
         {
+            activators = new DoorActivator[Doors.Length];
             for (int i=0; i<Doors.Length; i++)
             {
                 activators[i] = Doors[i].GetComponent<DoorActivator>();
