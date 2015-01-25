@@ -14,4 +14,9 @@ public class DoorActivator : MonoBehaviour {
     {
         anim.SetTrigger("OpenDoor");
     }
+
+    public void CloseDoor()
+    {
+        anim.SetTrigger("CloseDoor");
+    }
 }
