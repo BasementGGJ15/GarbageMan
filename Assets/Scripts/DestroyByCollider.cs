@@ -5,7 +5,8 @@ public class DestroyByCollider : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Area1" && other.tag != "Area2" && other.tag != "Area3" && other.tag != "Area4" && other.tag != "Area5" && other.tag != "Player")
+        if (other.tag != "Area1" && other.tag != "Area2" && other.tag != "Area3" && other.tag != "Area4" && other.tag != "Area5" && other.tag != "Player" && 
+            other.tag != "Garbage")
         {
             Destroy(this.gameObject);
         }

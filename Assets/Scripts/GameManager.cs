@@ -27,11 +27,11 @@ public class GameManager : MonoBehaviour {
         
         areaTagToInt = new Dictionary<string, Area>()
         {
-            { "Area1", new Area() {Id = 1,Location =  areas[0], Name = "Area1", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area1Spawner")}},
-            { "Area2", new Area() {Id = 2,Location =  areas[1], Name = "Area2", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area2Spawner") }},
-            { "Area3", new Area() {Id = 3,Location =  areas[2], Name = "Area3", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area3Spawner") }},
-            { "Area4", new Area() {Id = 4,Location =  areas[3], Name = "Area4", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area4Spawner") }},
-            { "Area5", new Area() {Id = 5,Location =  areas[4], Name = "Area5", startingGarbage = 2, maxGarbage = 6, spawners = GameObject.FindGameObjectsWithTag("Area5Spawner") }}
+            { "Area1", new Area() {Id = 1,Location =  areas[0], Name = "Area1", startingGarbage = 4, maxGarbage = 20, spawners = GameObject.FindGameObjectsWithTag("Area1Spawner")}},
+            { "Area2", new Area() {Id = 2,Location =  areas[1], Name = "Area2", startingGarbage = 18, maxGarbage = 20, spawners = GameObject.FindGameObjectsWithTag("Area2Spawner") }},
+            { "Area3", new Area() {Id = 3,Location =  areas[2], Name = "Area3", startingGarbage = 8, maxGarbage = 15, spawners = GameObject.FindGameObjectsWithTag("Area3Spawner") }},
+            { "Area4", new Area() {Id = 4,Location =  areas[3], Name = "Area4", startingGarbage = 14, maxGarbage = 20, spawners = GameObject.FindGameObjectsWithTag("Area4Spawner") }},
+            { "Area5", new Area() {Id = 5,Location =  areas[4], Name = "Area5", startingGarbage = 4, maxGarbage = 20, spawners = GameObject.FindGameObjectsWithTag("Area5Spawner") }}
         };
         
         garbageMeter.maxValue = maxGarbageForCurrentLevel;

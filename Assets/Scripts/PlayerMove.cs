@@ -135,14 +135,17 @@ public class PlayerMove : MonoBehaviour
 
     public void DieFromMeter()
     {
-        anim.SetTrigger("DieFromMeter");
         isDead = true;
+        collider.enabled = false;
+        anim.SetTrigger("DieFromMeter");
     }
 
     public void DieFromHealth()
     {
-        anim.SetTrigger("DieFromHealth");
         isDead = true;
+        collider.enabled = false;
+        PlayDeathSound();
+        anim.SetTrigger("DieFromHealth");      
     }
 
     public void PlayDeathSound()
