@@ -83,6 +83,13 @@ public class GameManager : MonoBehaviour {
             Area area;
             areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out area);
             currentArea = area.Id;
+            SetMaxGarbage(area.maxGarbage);
+            garbageAmount = area.startingGarbage;
+            garbageMeter.value = garbageAmount;
+            foreach (GameObject spawner in area.spawners)
+            {
+                spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+            }
         }
         else
         {
@@ -90,6 +97,13 @@ public class GameManager : MonoBehaviour {
             Area area;
             areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out area);
             currentArea = area.Id;
+            SetMaxGarbage(area.maxGarbage);
+            garbageAmount = area.startingGarbage;
+            garbageMeter.value = garbageAmount;
+            foreach (GameObject spawner in area.spawners)
+            {
+                spawner.GetComponent<MonsterSpawner>().spawnsEnabled = true;
+            }
         }
     }
 }

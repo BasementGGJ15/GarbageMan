@@ -6,6 +6,7 @@ public class MonsterSpawner : MonoBehaviour {
     public GameObject enemy;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
+    public bool spawnsEnabled;
 
 
     void Start()
@@ -18,7 +19,10 @@ public class MonsterSpawner : MonoBehaviour {
     {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        if(spawnsEnabled) 
+        {
+            Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        }
     }
 
 }
