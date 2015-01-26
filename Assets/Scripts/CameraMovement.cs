@@ -27,6 +27,6 @@ public class CameraMovement : MonoBehaviour {
         Vector3 Start = transform.position;
         Vector3 Destination = CalculateCameraDestinationAboveScene(point1, point2);
 
-        StartCoroutine(MoveObject(Start, Destination, 1.0f));
+        StartCoroutine(MoveObject(Start, Destination, CameraSpeed));
     }
 }
