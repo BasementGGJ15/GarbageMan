@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<int, List<GameObject>> Doors;
     //public List<GameObject> Area1Doors;
 
-    public CameraLerp cameraLerp;
+    public CameraMovement cameraMovement;
 
     Dictionary<string, Area> areaTagToInt; 
 
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
             Area areaFrom;
             areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out areaFrom);
             areaFrom.startingGarbage = 0;
-            cameraLerp.StartLerping(neighbours[0], neighbours[1]);
+            cameraMovement.InitiateCameraMove(neighbours[0], neighbours[1]);
             Area areaTo;
             areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out areaTo);
             currentArea = areaTo.Id;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour {
             Area areaFrom;
             areaTagToInt.TryGetValue(neighbours[1].gameObject.tag, out areaFrom);
             areaFrom.startingGarbage = 0;
-            cameraLerp.StartLerping(neighbours[1], neighbours[0]);
+            cameraMovement.InitiateCameraMove(neighbours[1], neighbours[0]);
             Area areaTo;
             areaTagToInt.TryGetValue(neighbours[0].gameObject.tag, out areaTo);
             currentArea = areaTo.Id;
