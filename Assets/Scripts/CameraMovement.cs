@@ -17,15 +17,15 @@ public class CameraMovement : MonoBehaviour {
         }
     }
 
-    Vector3 CalculateCameraDestinationAboveScene(Transform point1, Transform point2)
+    Vector3 CalculateCameraDestinationAboveScene(Transform pointOnScene)
     {
-        return new Vector3(point2.position.x, transform.position.y, point2.position.z);
+        return new Vector3(pointOnScene.position.x, transform.position.y, pointOnScene.position.z);
     }
 
     public void InitiateCameraMove(Transform point1, Transform point2)
     {
         Vector3 Start = transform.position;
-        Vector3 Destination = CalculateCameraDestinationAboveScene(point1, point2);
+        Vector3 Destination = CalculateCameraDestinationAboveScene(point2);
 
         StartCoroutine(MoveObject(Start, Destination, CameraSpeed));
     }
