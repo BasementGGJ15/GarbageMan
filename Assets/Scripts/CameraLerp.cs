@@ -10,22 +10,28 @@ public class CameraLerp : MonoBehaviour {
     Vector3 LerpStep;
     Vector3 LerpStopPoint;
     bool lerpInProgress;
+    float previousMagSqrToTarget = float.MaxValue;
     float closeEnoughToEnd = 0.01f;
 	
 	void Update () 
     {
-        //if (Input.GetKey(KeyCode.T) && !lerpInProgress)
-        //{
-        //    CalculateLerpStep();
-        //    lerpInProgress = true;
-        //}
         if (lerpInProgress)
         {
             transform.position += LerpStep * Time.deltaTime;
-            Vector3 difference = transform.position - LerpStopPoint;
+            Vector3 difference =  LerpStopPoint - transform.position;
+            if (difference.sqrMagnitude < previousMagSqrToTarget)
+            {
+                previousMagSqrToTarget = difference.sqrMagnitude;
+            }
+            else
+            {
+                lerpInProgress = false;
+                previousMagSqrToTarget = float.MaxValue;
+            }
             if (difference.sqrMagnitude <= closeEnoughToEnd)
             {
                 lerpInProgress = false;
+                previousMagSqrToTarget = float.MaxValue;
             }       
         } 
 	}
